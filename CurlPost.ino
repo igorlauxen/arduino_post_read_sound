@@ -45,10 +45,15 @@ void setup(){
   Serial.println("Starting...");
 }
 
-int pin = 2;
+/*
+RED = 3.3V
+BLACK = GND
+BLUE = A0 (Analog 0 entry)
+*/
 
 void loop(){
-  double value = digitalRead(pin);
+  double value = analogRead(0);
+  Serial.println(value);
   URL_TO_SERVICE = "https://iotmms"+INUMBER_TRIAL+"trial.hanatrial.ondemand.com/com.sap.iotservices.mms/v1/api/http/data/"+DEVICE_ID+"/"+MESSAGE_TYPE+"?test="+value;
   post();
 }
