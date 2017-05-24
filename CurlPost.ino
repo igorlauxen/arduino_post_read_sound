@@ -5,8 +5,6 @@
 String INUMBER_TRIAL = "i841640"; 
 String DEVICE_ID = "32b9f043-8569-464e-8bc4-95c567d98d00";
 String MESSAGE_TYPE = "e0a6c3bab615e97310f0";
-//dummy entries
-int CALOR_TEST = 130;
 String URL_TO_SERVICE = "";
 String USER_AUTHENTICATION = "Bearer YOUR_DEVICE_TOKEN";
 
@@ -47,8 +45,15 @@ void setup(){
   Serial.println("Starting...");
 }
 
+/*
+RED = 3.3V
+BLACK = GND
+BLUE = A0 (Analog 0 entry)
+*/
+
 void loop(){
-  CALOR_TEST = random(1,20);
-  URL_TO_SERVICE = "https://iotmms"+INUMBER_TRIAL+"trial.hanatrial.ondemand.com/com.sap.iotservices.mms/v1/api/http/data/"+DEVICE_ID+"/"+MESSAGE_TYPE+"?test="+CALOR_TEST;
+  double value = analogRead(0);
+  Serial.println(value);
+  URL_TO_SERVICE = "https://iotmms"+INUMBER_TRIAL+"trial.hanatrial.ondemand.com/com.sap.iotservices.mms/v1/api/http/data/"+DEVICE_ID+"/"+MESSAGE_TYPE+"?test="+value;
   post();
 }
